@@ -27,10 +27,7 @@ module "vpc" {
   enable_nat_gateway = true
   enable_vpn_gateway = var.enable_vpn_gateway
 
-  tags = {
-    project     = "project-alpha",
-    environment = "dev"
-  }
+  tags = var.resource_tags
 }
 
 module "app_security_group" {
@@ -43,10 +40,7 @@ module "app_security_group" {
 
   ingress_cidr_blocks = module.vpc.public_subnets_cidr_blocks
 
-  tags = {
-    project     = "project-alpha",
-    environment = "dev"
-  }
+  tags = var.resource_tags
 }
 
 module "lb_security_group" {
@@ -59,10 +53,7 @@ module "lb_security_group" {
 
   ingress_cidr_blocks = ["0.0.0.0/0"]
 
-  tags = {
-    project     = "project-alpha",
-    environment = "dev"
-  }
+  tags = var.resource_tags
 }
 
 resource "random_string" "lb_id" {
